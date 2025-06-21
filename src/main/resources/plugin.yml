@@ -1,0 +1,15 @@
+name: NHook
+version: '1.0'
+main: nesoi.aysihuniks.nhook.NHook
+api-version: '1.8'
+authors: [ aysihuniks ]
+description: Reflect website data in minecraft
+commands:
+  nhook:
+permissions:
+  nclaim.admin:
+    default: op
+    children:
+      nclaim.reload: true
+  nclaim.reload:
+    default: false
