@@ -6,6 +6,7 @@ import nesoi.aysihuniks.nhook.api.NHookAPI;
 import nesoi.aysihuniks.nhook.command.AllCommandExecutor;
 import nesoi.aysihuniks.nhook.database.DatabaseManager;
 import nesoi.aysihuniks.nhook.integrations.NPlaceholder;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,8 @@ public final class NHook extends JavaPlugin {
             command.setExecutor(new AllCommandExecutor());
             command.setTabCompleter(new AllCommandExecutor());
         }
+
+        new Metrics(this, 26280);
     }
 
     public static NHook inst() {
