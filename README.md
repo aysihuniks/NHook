@@ -7,7 +7,7 @@ NHook enables seamless synchronization between your website and your Minecraft s
 It allows you to display any data stored on your website—such as player credit, registration date, or custom profile information—directly in-game.  
 With NHook, you can easily show web-based stats, player history, and other database-driven details to players while they play, bridging the gap between web and server worlds.
 
-[![discord](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://discord.gg/qcW6YrxwqJ)
+[![discord](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://discord.gg/tbstudio)
 
 ---
 
