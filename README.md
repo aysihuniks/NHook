@@ -93,3 +93,7 @@ for (String player : richPlayers) {
 This project is licensed under the NESOI Plugin License v1.0.
 
 ---
+
+## Picture
+
+![hologram](https://github.com/user-attachments/assets/56ea88f5-e169-4a7a-bdad-66c03b32ef16)
