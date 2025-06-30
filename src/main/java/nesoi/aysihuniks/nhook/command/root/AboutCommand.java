@@ -15,9 +15,7 @@ public class AboutCommand extends BaseCommand {
         String pluginVersion = descriptionFile.getVersion();
         String pluginAuthor = String.join(", ", descriptionFile.getAuthors());
 
-        NHook.getInstance().tell(sender, "&fThis server is running &6" + pluginName + " " + pluginVersion + " &fby" + "&6" + pluginAuthor + "\n"
-        + "forked by ozaii1337 "
-        );
+        NHook.getInstance().tell(sender, "&fThis server is running &6" + pluginName + " " + pluginVersion + " &fby" + "&6" + pluginAuthor);
         return true;
     }
 }
