@@ -5,6 +5,9 @@ import nesoi.aysihuniks.nhook.NHook;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 /**
  * NHook PlaceholderAPI expansion class.
  * <p>
@@ -18,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NPlaceholder extends PlaceholderExpansion {
 
+    private static final long TIMEOUT_SECONDS = 5; // Timeout for database operations
+
     @Override
     public @NotNull String getAuthor() {
         return "aysihuniks";
@@ -30,7 +35,7 @@ public class NPlaceholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0";
+        return "1.0.1";
     }
 
     /**
@@ -72,14 +77,24 @@ public class NPlaceholder extends PlaceholderExpansion {
 
         if (targetPlayer == null || targetPlayer.isEmpty()) return "";
 
-        // If the column requested is "all", fetch all columns as a JSON string
-        String value;
-        if ("all".equalsIgnoreCase(column)) {
-            value = NHook.inst().getDatabaseManager().fetchPlayerAllValues(table, targetPlayer);
-        } else {
-            // Otherwise, fetch the specific column value
-            value = NHook.inst().getDatabaseManager().fetchPlayerValue(table, column, targetPlayer);
+        try {
+            // If the column requested is "all", fetch all columns as a JSON string
+            CompletableFuture<String> future;
+            if ("all".equalsIgnoreCase(column)) {
+                future = NHook.inst().getDatabaseManager().fetchPlayerAllValuesAsync(table, targetPlayer);
+            } else {
+                // Otherwise, fetch the specific column value
+                future = NHook.inst().getDatabaseManager().fetchPlayerValueAsync(table, column, targetPlayer);
+            }
+
+            // Wait for result with timeout to prevent blocking
+            String value = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            return value != null ? value : "";
+
+        } catch (Exception e) {
+            // Log error and return empty string to prevent placeholder errors
+            NHook.inst().getLogger().warning("Error fetching placeholder value for " + params + ": " + e.getMessage());
+            return "";
         }
-        return value != null ? value : "";
     }
 }
