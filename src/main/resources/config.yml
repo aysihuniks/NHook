@@ -77,3 +77,6 @@ logging:
   performance: false
   # level: Log level (0=OFF, 1=ERROR, 2=WARN, 3=INFO, 4=DEBUG)
   level: 2
+
+messages:
+  prefix: "&8[&6NHook&8]&r "

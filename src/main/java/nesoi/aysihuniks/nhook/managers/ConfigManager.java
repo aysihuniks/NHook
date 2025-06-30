@@ -53,6 +53,9 @@ public class ConfigManager {
     private boolean performanceLogging;
     private int logLevel; // 0=OFF, 1=ERROR, 2=WARN, 3=INFO, 4=DEBUG
 
+    private String messagePrefix;
+
+
     private ConfigManager(NHook plugin) {
         this.plugin = plugin;
     }
@@ -109,10 +112,17 @@ public class ConfigManager {
         // Load logging settings
         loadLoggingSettings();
 
+        loadMessageSettings();
+
         return this;
     }
 
-    // ... diğer tüm metodlar aynı kalıyor ...
+    private void loadMessageSettings() {
+        setMessagePrefix(config.getString("messages.prefix", "&8[&6NHook&8]&r "));
+    }
+    private void saveMessageSettings() {
+        config.set("messages.prefix", getMessagePrefix());
+    }
 
     private void loadDatabaseSettings() {
         setHost(config.getString("database.host", "localhost"));
@@ -158,7 +168,6 @@ public class ConfigManager {
         setLogLevel(config.getInt("logging.level", 2)); // WARN level default
     }
 
-    // ... geri kalan tüm metodlar aynı ...
 
     public void save() {
         try {
@@ -173,6 +182,8 @@ public class ConfigManager {
 
             // Save logging settings
             saveLoggingSettings();
+
+            saveMessageSettings();
 
             config.save(new File(plugin.getDataFolder(), "config.yml"));
             plugin.getLogger().info("Configuration saved successfully.");

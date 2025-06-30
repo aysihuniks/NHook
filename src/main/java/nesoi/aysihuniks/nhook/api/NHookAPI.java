@@ -70,9 +70,6 @@ public class NHookAPI {
         this.plugin = NHook.getInstance();
     }
 
-    // ================================
-    // SINGLE VALUE RETRIEVAL METHODS
-    // ================================
 
     /**
      * Retrieves a String value asynchronously from the database.
@@ -181,10 +178,6 @@ public class NHookAPI {
                 .thenApply(value -> (Object) value);
     }
 
-    // ================================
-    // BATCH OPERATIONS
-    // ================================
-
     /**
      * Retrieves values for multiple players asynchronously.
      */
@@ -220,10 +213,6 @@ public class NHookAPI {
                     return result;
                 });
     }
-
-    // ================================
-    // ADVANCED QUERY METHODS
-    // ================================
 
     /**
      * Retrieves player names whose column value contains the specified substring (case-insensitive).
@@ -339,10 +328,6 @@ public class NHookAPI {
                 });
     }
 
-    // ================================
-    // SYNCHRONOUS COMPATIBILITY METHODS
-    // ================================
-
     /**
      * Synchronous wrapper for getString (blocks thread - use sparingly!)
      */
@@ -391,10 +376,6 @@ public class NHookAPI {
         }
     }
 
-    // ================================
-    // UTILITY AND HELPER METHODS
-    // ================================
-
     /**
      * Clears the internal cache.
      */
@@ -418,10 +399,6 @@ public class NHookAPI {
         return String.format("Cache Stats - Total: %d entries, Memory: ~%d KB",
                 cache.size(), cache.size() * 100 / 1024); // Rough estimate
     }
-
-    // ================================
-    // PRIVATE HELPER METHODS
-    // ================================
 
     private CompletableFuture<List<String>> executePlayerListQuery(String sql, Object... params) {
         return db.rawQueryAsync(sql, params)

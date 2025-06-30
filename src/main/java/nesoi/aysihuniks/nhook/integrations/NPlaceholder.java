@@ -28,7 +28,6 @@ public class NPlaceholder extends PlaceholderExpansion {
     private final DatabaseManager databaseManager;
 
     public NPlaceholder() {
-        // Get the singleton instance of DatabaseManager
         this.databaseManager = DatabaseManager.getInstance();
     }
 

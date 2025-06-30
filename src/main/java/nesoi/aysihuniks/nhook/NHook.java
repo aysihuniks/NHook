@@ -38,7 +38,6 @@ public final class NHook extends JavaPlugin {
 
         this.NHookApi = new NHookAPI(DatabaseManager.getInstance());
 
-
     }
 
     public static NHook getInstance() {
@@ -52,6 +51,8 @@ public final class NHook extends JavaPlugin {
     }
 
     public void tell(CommandSender receiver, String text) {
-        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', "&8[&6NHook&8]&r " + text));
+        String prefix = ConfigManager.getInstance().getMessagePrefix();
+        receiver.sendMessage(ChatColor.translateAlternateColorCodes('&', prefix + text));
     }
+
 }
