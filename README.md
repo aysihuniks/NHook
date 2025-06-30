@@ -1,38 +1,99 @@
+# NHook - Advanced Player Data Management
 
-## English Version — NHook Fork Update Summary
+NHook is a modern, flexible, and developer-friendly Minecraft plugin for advanced player data management using MySQL.
 
-This fork of **NHook** enhances the original Minecraft plugin with several important improvements:
+**Main Purpose:**  
+NHook enables seamless synchronization between your website and your Minecraft server.  
+It allows you to display any data stored on your website such as player credit, registration date, or custom profile information directly in-game.  
+With NHook, you can easily show web-based stats, player history, and other database-driven details to players while they play, bridging the gap between web and server worlds.
 
-### New Features and Fixes:
-
-* **Asynchronous Database Manager:** All database queries run asynchronously to prevent server lag.
-* **Built-in Cache System:** Reduces database load and speeds up data retrieval.
-* **Updated Config Class:** Singleton pattern with more detailed and flexible settings.
-* **Enhanced API:** Added async data fetching, richer query methods, and better type safety.
-* **PlaceholderAPI Hook Improvements:** Fixed timeouts, added caching, and improved error handling.
-* **More Detailed Configuration:** Expanded `config.yml` for database, cache, debug, and placeholder settings.
-* **Bug Fixes and Code Cleanup:** General improvements for stability and maintainability.
-
-### Original Plugin Repository
-
-[https://github.com/aysihuniks/NHook](https://github.com/aysihuniks/NHook)
+[![discord](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://discord.gg/qcW6YrxwqJ)
 
 ---
 
-## Türkçe Versiyon — NHook Fork Güncelleme Özeti
+## ✨ Features
 
-Bu fork, **NHook** adlı Minecraft eklentisini aşağıdaki önemli geliştirmelerle iyileştirmektedir:
+- 🛡️ **Seamless MySQL Integration** – Instantly connect your server to your MySQL database.
+- ⚡ **High Performance** – Optimized queries and lightweight design for minimal server impact.
+- 🏷️ **Type-Safe API** – Fetch player data as `String`, `Integer`, `Long`, `Double`, `Date`, and more.
+- 🔎 **Advanced Search & Filtering** – Find players by nickname, stats, or any custom criteria with powerful query helpers.
+- 📊 **Leaderboard & Ranking Support** – Effortlessly build leaderboards and ranking systems using your data.
+- 🔄 **Real-Time Data Access** – Instantly fetch and update player information in-game.
+- 🧩 **Extensible & Modular** – Clean, well-documented codebase makes it easy to extend, integrate, and customize.
+- ♻️ **Automatic Connection Management** – Handles reconnects and safely manages database sessions.
+- 📨 **Plugin-to-Plugin API** – Easily access player data from other plugins.
+- 📝 **Comprehensive Logging** – Detailed error and info logging for easy debugging.
 
-### Yeni Özellikler ve Düzeltmeler:
+---
 
-* **Asenkron Veritabanı Yöneticisi:** Tüm veritabanı sorguları ana sunucu iş parçacığını bloke etmeden asenkron olarak çalışır.
-* **Yerleşik Cache Sistemi:** Veritabanı yükünü azaltır ve veri erişimini hızlandırır.
-* **Güncellenmiş Config Sınıfı:** Singleton deseninde, daha detaylı ve esnek ayarlar sunar.
-* **Gelişmiş API:** Asenkron veri alma, daha zengin sorgu yöntemleri ve gelişmiş tip güvenliği eklendi.
-* **PlaceholderAPI Hook İyileştirmeleri:** Zaman aşımı sorunları düzeltildi, cache eklendi, hata yönetimi geliştirildi.
-* **Daha Detaylı Konfigürasyon:** `config.yml` dosyası, veritabanı, cache, debug ve placeholder ayarları için genişletildi.
-* **Hata Düzeltmeleri ve Kod Temizliği:** Genel kararlılık ve sürdürülebilirlik için iyileştirmeler yapıldı.
+## 🛠️ Quick Start
 
-### Orijinal Eklenti Deposu
+1. **Download & Install**
+    - Place the latest NHook`.jar` in your server's `plugins/` folder.
+    - [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) required.
 
-[https://github.com/aysihuniks/NHook](https://github.com/aysihuniks/NHook)
+2. **Configure MySQL**
+    - Set your database details in `config.yml`:
+    ```yaml
+    database:
+      host: "localhost"
+      port: 3306
+      db: "nesoi"
+      user: "root"
+      password: ""
+    ```
+
+3. **Use the API in Your Plugin**
+    ```java
+    DatabaseManager db = new DatabaseManager();
+    db.connect();
+
+    NHookAPI api = new NHookAPI(db);
+
+    // Get player's credit from website database
+    int credit = api.getInt("players", "credit", "PlayerName");
+
+    // Find all players whose nickname contains "cat"
+    List<String> catPlayers = api.getPlayersWhereColumnContainsAsync("players", "nickname", "cat");
+
+    db.disconnect(); // Disconnect when your plugin is disabled
+    ```
+
+---
+
+## 📚 API Overview
+
+| Method                                         | Description                                       |
+|------------------------------------------------|---------------------------------------------------|
+| `getString(table, column, player)`             | Get a value as `String`                           |
+| `getInt(table, column, player)`                | Get a value as `Integer`                          |
+| `getLong(table, column, player)`               | Get a value as `Long`                             |
+| `getDouble(table, column, player)`             | Get a value as `Double`                           |
+| `getDate(table, column, player, format)`       | Get a value as `Date` (with date format)          |
+| `getPlayersWhereColumnContainsAsync(...)`           | Find players where column contains a string       |
+| `getPlayersWhereColumnStartsWithAsync(...)`         | Find players where column starts with string      |
+| `getPlayersWhereColumnEndsWithAsync(...)`           | Find players where column ends with string        |
+| `getPlayersWithIntGreaterThanAsync(...)`            | Find players where int column > value             |
+
+---
+
+## 💡 Example: Top-Rich Players
+
+```java
+List<String> richPlayers = api.getPlayersWithIntGreaterThanAsync("players", "credit", 100000);
+for (String player : richPlayers) {
+    System.out.println("Rich: " + player);
+}
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the NESOI Plugin License v1.0.
+
+---
+
+## Picture
+
+![hologram](https://github.com/user-attachments/assets/56ea88f5-e169-4a7a-bdad-66c03b32ef16)
