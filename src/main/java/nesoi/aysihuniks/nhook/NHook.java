@@ -1,11 +1,11 @@
 package nesoi.aysihuniks.nhook;
 
-import lombok.Getter;
-import lombok.Setter;
+
 import nesoi.aysihuniks.nhook.api.NHookAPI;
 import nesoi.aysihuniks.nhook.command.AllCommandExecutor;
-import nesoi.aysihuniks.nhook.database.DatabaseManager;
+import nesoi.aysihuniks.nhook.managers.DatabaseManager;
 import nesoi.aysihuniks.nhook.integrations.NPlaceholder;
+import nesoi.aysihuniks.nhook.managers.ConfigManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,24 +13,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-@Getter
-@Setter
 public final class NHook extends JavaPlugin {
 
-    private static NHook inst;
-
-    private NHookAPI api;
-    private Config nConfig;
-    private DatabaseManager databaseManager;
+    private static NHook INSTANCE;
+    private NHookAPI NHookApi;
 
     @Override
     public void onEnable() {
-        inst = this;
-        this.api = new NHookAPI(databaseManager);
+        INSTANCE = this;
 
-        nConfig = new Config(this).load();
-        databaseManager = new DatabaseManager();
-        databaseManager.connect();
+        ConfigManager.initialize(this);
+        DatabaseManager.initialize();
+
 
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new NPlaceholder().register();
@@ -42,17 +36,19 @@ public final class NHook extends JavaPlugin {
             command.setTabCompleter(new AllCommandExecutor());
         }
 
-        new Metrics(this, 26280);
+        this.NHookApi = new NHookAPI(DatabaseManager.getInstance());
+
+
     }
 
-    public static NHook inst() {
-        return inst;
+    public static NHook getInstance() {
+        return INSTANCE;
     }
 
     @Override
     public void onDisable() {
-        inst = null;
-        databaseManager.disconnect();
+        INSTANCE = null;
+        DatabaseManager.getInstance().disconnect();
     }
 
     public void tell(CommandSender receiver, String text) {

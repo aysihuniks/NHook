@@ -33,7 +33,7 @@ public class AllCommandExecutor implements CommandExecutor, TabCompleter {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            NHook.inst().tell(player, "&fCommand not found.");
+            NHook.getInstance().tell(player, "&fCommand not found.");
             return true;
         }
 
@@ -41,12 +41,12 @@ public class AllCommandExecutor implements CommandExecutor, TabCompleter {
 
         if (subCommand.equals("admin")) {
             if (!player.hasPermission("nhook.admin")) {
-                NHook.inst().tell(player, "&cYou don't have permission to do that!");
+                NHook.getInstance().tell(player, "&cYou don't have permission to do that!");
                 return true;
             }
 
             if (args.length == 1) {
-                NHook.inst().tell(player, "&fAvailable subcommands: &6reload");
+                NHook.getInstance().tell(player, "&fAvailable subcommands: &6reload");
                 return true;
             }
 
@@ -56,7 +56,7 @@ public class AllCommandExecutor implements CommandExecutor, TabCompleter {
             if (adminCmd != null) {
                 return adminCmd.onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
             } else {
-                NHook.inst().tell(player, "&fCommand not found.");
+                NHook.getInstance().tell(player, "&fCommand not found.");
                 return true;
             }
         }
@@ -66,7 +66,7 @@ public class AllCommandExecutor implements CommandExecutor, TabCompleter {
             return cmd.onCommand(sender, command, label, args);
         }
 
-        NHook.inst().tell(player, "&fCommand not found.");
+        NHook.getInstance().tell(player, "&fCommand not found.");
         return true;
     }
 

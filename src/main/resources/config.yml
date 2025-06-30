@@ -1,6 +1,79 @@
+# NHook Configuration File
+# ========================
+# This file contains all configuration options for NHook plugin.
+# For more information, visit: https://github.com/your-repo/nhook
+
+# Database connection settings
+# Configure your MySQL database connection here
 database:
-  host: localhost
+  host: "localhost"
   port: 3306
-  db: nesoi
-  user: root
+  db: "minecraft"
+  user: "root"
   password: ""
+  # Legacy settings for backward compatibility
+  table: "players"
+  column: "player"
+
+# Cache system settings
+# Enables intelligent caching to improve performance
+cache:
+  # enabled: Enable/disable the cache system
+  enabled: true
+  # max-size: Maximum number of entries to cache
+  max-size: 1000
+  # ttl-seconds: Time to live for cached entries (in seconds)
+  ttl-seconds: 300
+  # cleanup-interval-seconds: How often to clean expired entries
+  cleanup-interval-seconds: 60
+  
+  # Automatic cleanup settings
+  auto-cleanup:
+    # enabled: Enable automatic cleanup of idle entries
+    enabled: true
+    # max-idle-seconds: Remove entries idle for this many seconds
+    max-idle-seconds: 1800
+  
+  # Cache statistics and monitoring
+  stats:
+    # enabled: Enable cache statistics logging
+    enabled: false
+  
+  # Cache debugging
+  debug:
+    # enabled: Enable detailed cache debug logging (use for troubleshooting)
+    enabled: false
+  
+  # Cache warmup settings
+  warmup:
+    # enabled: Pre-load frequently accessed data on startup
+    enabled: false
+    # delay-seconds: Delay before starting warmup process
+    delay-seconds: 30
+
+# Performance optimization settings
+performance:
+  # max-concurrent-queries: Maximum number of concurrent database queries
+  max-concurrent-queries: 50
+  # query-timeout-seconds: Timeout for database queries
+  query-timeout-seconds: 30
+  
+  # Connection pooling settings (HikariCP)
+  connection-pooling:
+    # enabled: Enable connection pooling for better performance
+    enabled: true
+    # pool-size: Maximum number of connections in the pool
+    pool-size: 10
+    # idle-timeout-seconds: How long connections can remain idle
+    idle-timeout-seconds: 600
+
+# Logging configuration
+logging:
+  # detailed: Enable detailed logging for debugging
+  detailed: false
+  # queries: Log all database queries (use for debugging)
+  queries: false
+  # performance: Log performance metrics
+  performance: false
+  # level: Log level (0=OFF, 1=ERROR, 2=WARN, 3=INFO, 4=DEBUG)
+  level: 2

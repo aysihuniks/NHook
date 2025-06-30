@@ -5,10 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import nesoi.aysihuniks.nhook.NHook;
-import nesoi.aysihuniks.nhook.database.DatabaseManager;
+import nesoi.aysihuniks.nhook.managers.DatabaseManager;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -17,7 +16,6 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -69,7 +67,7 @@ public class NHookAPI {
 
     public NHookAPI(DatabaseManager db) {
         this.db = db;
-        this.plugin = NHook.inst();
+        this.plugin = NHook.getInstance();
     }
 
     // ================================
