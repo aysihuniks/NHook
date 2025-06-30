@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * Supported placeholders:
  *   %nhook_table_column% - Returns the specified column for the sender (self).
- *   %nhook_table_column_playername% - Returns the specified column for the given player.
+ *   %nhook_table_column_player% - Returns the specified column for the given player.
  *   %nhook_table_all% - Returns all columns for the sender (as JSON).
- *   %nhook_table_all_playername% - Returns all columns for the given player (as JSON).
+ *   %nhook_table_all_player% - Returns all columns for the given player (as JSON).
  * <p>
  * If the column name contains '_', use '-' in the placeholder, e.g. %nhook_players_last-login%.
  * <p>
@@ -96,7 +96,7 @@ public class NPlaceholder extends PlaceholderExpansion {
             return "";
         }
 
-        // Check if database is connected
+        // Check if a database is connected
         if (!databaseManager.isConnected()) {
             NHook.getInstance().getLogger().warning("Database is not connected for placeholder request: " + params);
             return "";
@@ -109,10 +109,10 @@ public class NPlaceholder extends PlaceholderExpansion {
         }
 
         try {
-            // Get the appropriate future based on request type
+            // Get the appropriate future based on a request type
             CompletableFuture<String> future = getFutureForRequest(request);
 
-            // Wait for result with timeout to prevent blocking
+            // Wait for a result with timeout to prevent blocking
             String value = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
             return value != null ? value : "";
 

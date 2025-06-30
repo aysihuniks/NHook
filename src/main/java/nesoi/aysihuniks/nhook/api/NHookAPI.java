@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 
 /**
  * Ultra-performant async API for NHook plugin with CompletableFuture support.
- *
+ * <p>
  * Provides type-safe async methods for accessing any column value from any table
  * in your database, for any player with full caching and batch operation support.
- *
+ * <p>
  * Supported types:
  *   - Integer (getIntAsync)
  *   - Long (getLongAsync)
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  *   - LocalDateTime (getLocalDateTimeAsync)
  *   - Boolean (getBooleanAsync)
  *   - Generic Object (getValueAsync)
- *
+ * <p>
  * Advanced features:
  *   - Batch operations for multiple players
  *   - Caching with TTL support
@@ -155,7 +155,7 @@ public class NHookAPI {
     }
 
     /**
-     * Retrieves a Date value asynchronously with specific format.
+     * Retrieves a Date value asynchronously with a specific format.
      */
     public CompletableFuture<Date> getDateAsync(String table, String column, String playerName, String format) {
         return getStringAsync(table, column, playerName)
@@ -397,7 +397,7 @@ public class NHookAPI {
     public String getCacheStats() {
         cleanExpiredCache();
         return String.format("Cache Stats - Total: %d entries, Memory: ~%d KB",
-                cache.size(), cache.size() * 100 / 1024); // Rough estimate
+                cache.size(), cache.size() * 100 / 1024); // Estimate
     }
 
     private CompletableFuture<List<String>> executePlayerListQuery(String sql, Object... params) {
@@ -479,7 +479,7 @@ public class NHookAPI {
                 SimpleDateFormat sdf = new SimpleDateFormat(format);
                 return sdf.parse(value.trim());
             } catch (ParseException ignored) {
-                // Try next format
+                // Try the next format
             }
         }
         return null;
@@ -509,7 +509,7 @@ public class NHookAPI {
             try {
                 return LocalDateTime.parse(value.trim(), formatter);
             } catch (DateTimeParseException ignored) {
-                // Try next formatter
+                // Try the next formatter
             }
         }
         return null;

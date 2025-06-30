@@ -2,7 +2,7 @@ name: NHook
 version: '1.0'
 main: nesoi.aysihuniks.nhook.NHook
 api-version: '1.8'
-authors: [ aysihuniks ]
+authors: [ aysihuniks, ozaii1337 ]
 description: Reflect website data in minecraft
 commands:
   nhook:

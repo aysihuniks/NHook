@@ -38,6 +38,8 @@ public final class NHook extends JavaPlugin {
 
         this.NHookApi = new NHookAPI(DatabaseManager.getInstance());
 
+        new Metrics(this, 26280);
+
     }
 
     public static NHook getInstance() {

@@ -8,7 +8,7 @@
 database:
   host: "localhost"
   port: 3306
-  db: "minecraft"
+  db: "nesoi"
   user: "root"
   password: ""
   # Legacy settings for backward compatibility
@@ -16,7 +16,7 @@ database:
   column: "player"
 
 # Cache system settings
-# Enables intelligent caching to improve performance
+# Enable intelligent caching to improve performance
 cache:
   # enabled: Enable/disable the cache system
   enabled: true
@@ -48,7 +48,7 @@ cache:
   warmup:
     # enabled: Pre-load frequently accessed data on startup
     enabled: false
-    # delay-seconds: Delay before starting warmup process
+    # delay-seconds: Delay before starting a warmup process
     delay-seconds: 30
 
 # Performance optimization settings

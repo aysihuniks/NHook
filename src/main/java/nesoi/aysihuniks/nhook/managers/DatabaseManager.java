@@ -230,7 +230,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Stores value in cache
+     * Stores value in a cache
      */
     private void storeInCache(String cacheKey, String value) {
         if (!config.isCacheEnabled() || value == null) {
@@ -478,13 +478,13 @@ public class DatabaseManager {
             return CompletableFuture.completedFuture(cachedValue);
         }
 
-        // Check if query is already pending to avoid duplicate requests
+        // Check if a query is already pending to avoid duplicate requests
         CompletableFuture<String> pendingFuture = pendingQueries.get(cacheKey);
         if (pendingFuture != null && !pendingFuture.isDone()) {
             return pendingFuture;
         }
 
-        // Create new query future
+        // Create a new query future
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             if (!isConnected()) {
                 plugin.getLogger().warning("Database is not connected for fetchPlayerValue");
@@ -541,13 +541,13 @@ public class DatabaseManager {
             return CompletableFuture.completedFuture(cachedValue);
         }
 
-        // Check if query is already pending
+        // Check if a query is already pending
         CompletableFuture<String> pendingFuture = pendingQueries.get(cacheKey);
         if (pendingFuture != null && !pendingFuture.isDone()) {
             return pendingFuture;
         }
 
-        // Create new query future
+        // Create a new query future
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             if (!isConnected()) {
                 plugin.getLogger().warning("Database is not connected for fetchPlayerAllValues");
@@ -592,7 +592,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Executes a query with callback for immediate processing (memory efficient)
+     * Executes a query with a callback for immediate processing (memory efficient)
      *
      * @param sql      The SQL query
      * @param callback The callback to process ResultSet

@@ -139,11 +139,11 @@ public class ConfigManager {
     private void loadCacheSettings() {
         setCacheEnabled(config.getBoolean("cache.enabled", true));
         setCacheMaxSize(config.getInt("cache.max-size", 1000));
-        setCacheTtl(config.getLong("cache.ttl-seconds", 300)); // 5 minutes default
-        setCacheCleanupInterval(config.getInt("cache.cleanup-interval-seconds", 60)); // 1 minute default
+        setCacheTtl(config.getLong("cache.ttl-seconds", 300)); // 5-minute default
+        setCacheCleanupInterval(config.getInt("cache.cleanup-interval-seconds", 60)); // 1-minute default
 
         setCacheAutoCleanupEnabled(config.getBoolean("cache.auto-cleanup.enabled", true));
-        setCacheMaxIdleTime(config.getLong("cache.auto-cleanup.max-idle-seconds", 1800)); // 30 minutes default
+        setCacheMaxIdleTime(config.getLong("cache.auto-cleanup.max-idle-seconds", 1800)); // 30-minute default
 
         setCacheStatsEnabled(config.getBoolean("cache.stats.enabled", false));
         setCacheDebugEnabled(config.getBoolean("cache.debug.enabled", false));
@@ -237,7 +237,7 @@ public class ConfigManager {
     }
 
     /**
-     * Reloads the configuration from file
+     * Reloads the configuration from a file
      */
     public void reload() {
         load();
