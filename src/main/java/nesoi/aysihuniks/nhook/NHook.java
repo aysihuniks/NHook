@@ -46,6 +46,10 @@ public final class NHook extends JavaPlugin {
         return INSTANCE;
     }
 
+    public NHookAPI getAPI() {
+        return this.NHookApi;
+    }
+
     @Override
     public void onDisable() {
         INSTANCE = null;
