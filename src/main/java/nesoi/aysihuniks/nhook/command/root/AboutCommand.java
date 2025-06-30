@@ -10,12 +10,14 @@ public class AboutCommand extends BaseCommand {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        PluginDescriptionFile descriptionFile = NHook.inst().getDescription();
+        PluginDescriptionFile descriptionFile = NHook.getInstance().getDescription();
         String pluginName = descriptionFile.getName();
         String pluginVersion = descriptionFile.getVersion();
         String pluginAuthor = String.join(", ", descriptionFile.getAuthors());
 
-        NHook.inst().tell(sender, "&fThis server is running &6" + pluginName + " " + pluginVersion + " &fby" + "&6" + pluginAuthor);
+        NHook.getInstance().tell(sender, "&fThis server is running &6" + pluginName + " " + pluginVersion + " &fby" + "&6" + pluginAuthor + "\n"
+        + "forked by ozaii1337 "
+        );
         return true;
     }
 }
